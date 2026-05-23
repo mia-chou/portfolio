@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mia Chou — Frontend Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --bg:#EDF3FC; --surface:#FFFFFF; --surface-2:#F0F6FF;
+      --ink:#0F1F3D; --ink-mid:#3A567A; --muted:#7A96BB;
+      --rose:#2457A4; --rose-pale:#D6E4F7;
+      --sage:#4C7FD4; --sage-pale:#E8F0FB;
+      --border:rgba(36,87,164,0.1); --shadow:0 4px 32px rgba(36,87,164,0.08);
+    }
+    html { scroll-behavior: smooth; } a { -webkit-tap-highlight-color: transparent; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--bg); color: var(--ink); overflow-x: hidden; font-weight: 400; }
+
+    .nav { display:flex; justify-content:space-between; align-items:center; padding:20px 48px; background:rgba(107,127,163,0.95); backdrop-filter:blur(12px); border-bottom:1px solid var(--border); position:sticky; top:0; z-index:100; }
+    .nav-logo { font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:600; color:#ffffff; text-decoration:none; }
+    .nav-links { display:flex; align-items:center; gap:28px; }
+    .nav-links a, .nav-links a:link, .nav-links a:visited, .nav-links a:active { font-size:13px; font-weight:600; color:#ffffff; text-decoration:none; transition:color 0.2s; } .nav-links a:hover { color:rgba(255,255,255,0.7); }
+    .nav-links a:hover { color:var(--ink); }
+    .nav-cta, .nav-cta:link, .nav-cta:visited, .nav-cta:hover, .nav-cta:active { background:transparent!important; color:#ffffff!important; padding:8px 22px!important; border-radius:100px!important; font-size:13px!important; font-weight:600!important; border:2px solid #ffffff!important; text-decoration:none!important; }
+    .nav-cta:hover { background:var(--rose)!important; }
+
+    .hero { min-height:calc(100vh - 61px); display:grid; grid-template-columns:1fr 1fr; }
+    .hero-left { padding:80px 48px; display:flex; flex-direction:column; justify-content:center; border-right:1px solid var(--border); }
+    .hero-eyebrow { font-size:15px; font-weight:700; letter-spacing:0.15em; text-transform:uppercase; color:var(--rose); margin-bottom:24px; animation:fadeUp 0.8s ease both; }
+    .hero-title { font-family:'Cormorant Garamond',serif; font-size:clamp(52px,7vw,96px); font-weight:300; line-height:1.0; color:var(--ink); margin-bottom:32px; animation:fadeUp 0.8s ease 0.1s both; }
+    .hero-title-italic { font-family:'Cormorant Garamond',serif; font-weight:300; color:var(--ink); }
+    .hero-role { font-size:18px; font-weight:700; color:var(--ink); letter-spacing:0.06em; text-transform:uppercase; margin-bottom:24px; animation:fadeUp 0.8s ease 0.3s both; }
+    .hero-desc { font-size:16px; line-height:1.8; color:var(--ink); font-weight:500; max-width:420px; margin-bottom:40px; animation:fadeUp 0.8s ease 0.4s both; }
+    .hero-actions { display:flex; gap:12px; flex-wrap:wrap; animation:fadeUp 0.8s ease 0.5s both; }
+    .btn-primary { background:#6B7FA3; color:#fff; padding:12px 26px; border-radius:100px; font-size:13px; font-weight:500; text-decoration:none; transition:background 0.2s,transform 0.2s; }
+    .btn-primary:hover { background:#5A6E92; transform:translateY(-2px); }
+    .btn-ghost { background:transparent; color:var(--ink); padding:12px 26px; border-radius:100px; border:1px solid var(--border); font-size:13px; font-weight:500; text-decoration:none; transition:border-color 0.2s,transform 0.2s; }
+    .btn-ghost:hover { border-color:var(--ink); transform:translateY(-2px); }
+
+    .hero-right { display:flex; flex-direction:column; padding:80px 48px; gap:20px; justify-content:center; animation:fadeUp 0.8s ease 0.3s both; }
+    .hero-stat-card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:24px 28px; box-shadow:var(--shadow); transition:transform 0.3s; }
+    .hero-stat-card:hover { transform:translateY(-3px); }
+    .hero-stat-card:nth-child(2) { margin-left:32px; }
+    .hero-stat-card:nth-child(3) { margin-left:16px; }
+    .stat-num { font-family:'Cormorant Garamond',serif; font-size:48px; font-weight:300; color:var(--ink); line-height:1; margin-bottom:4px; }
+    .stat-label { font-size:13px; color:var(--ink-mid); font-weight:600; letter-spacing:0.04em; }
+
+    .skills-strip { border-top:1px solid var(--border); border-bottom:1px solid var(--border); padding:18px 48px; display:flex; gap:10px; flex-wrap:wrap; background:var(--surface-2); }
+    .skill-pill { font-size:12px; font-weight:500; padding:6px 14px; border-radius:100px; border:1px solid var(--border); background:var(--surface); color:var(--ink-mid); }
+
+    .container { max-width:1100px; margin:0 auto; padding:0 48px; }
+    .section { padding:80px 0; border-bottom:1px solid var(--border); }
+    .section-eyebrow { font-size:11px; font-weight:600; letter-spacing:0.2em; text-transform:uppercase; color:var(--rose); margin-bottom:10px; }
+    .section-title { font-family:'Cormorant Garamond',serif; font-size:clamp(32px,4vw,52px); font-weight:300; line-height:1.1; color:var(--ink); margin-bottom:48px; }
+
+    .about-grid { display:grid; grid-template-columns:1fr 1.5fr; gap:80px; align-items:start; }
+    .about-left { position:sticky; top:80px; }
+    .about-tag { display:inline-block; font-size:11px; font-weight:600; letter-spacing:0.1em; text-transform:uppercase; padding:6px 14px; background:var(--rose-pale); color:var(--rose); border-radius:100px; margin-bottom:20px; }
+    .about-big { font-family:'Cormorant Garamond',serif; font-size:clamp(32px,4vw,52px); font-weight:300; line-height:1.1; color:var(--ink); }
+    .about-big em { font-style:italic; color:var(--sage); }
+    .about-right p { font-size:16px; line-height:1.85; color:var(--ink-mid); font-weight:400; margin-bottom:18px; }
+    .about-creds { display:flex; flex-direction:column; gap:10px; margin-top:28px; padding-top:28px; border-top:1px solid var(--border); }
+    .cred-row { display:flex; align-items:center; gap:14px; padding:12px 16px; background:var(--surface); border:1px solid var(--border); border-radius:12px; transition:border-color 0.3s; }
+    .cred-row:hover { border-color:var(--rose); }
+    .cred-emoji { font-size:18px; }
+    .cred-text { font-size:14px; font-weight:600; color:var(--ink); }
+    .cred-sub { font-size:12px; color:var(--ink-mid); margin-top:2px; font-weight:400; }
+
+    .projects-section { background:var(--surface); }
+    .projects-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+    .project-card { border:1px solid var(--border); border-radius:20px; padding:28px; display:flex; flex-direction:column; gap:12px; background:var(--bg); opacity:0; transform:translateY(24px); transition:opacity 0.6s ease,transform 0.6s ease,border-color 0.3s,box-shadow 0.3s; }
+    .project-card.visible { opacity:1; transform:none; }
+    .project-card:hover { border-color:var(--rose); box-shadow:0 8px 40px rgba(196,112,90,0.1); }
+    .project-card.dark { background:#6B7FA3; border-color:#6B7FA3; }
+    .project-card.dark h3 { color:#fff; }
+    .project-card.dark p { color:rgba(255,255,255,0.8); font-weight:500; }
+    .project-card.dark .project-tag { background:rgba(255,255,255,0.1); color:rgba(255,255,255,0.7); border-color:transparent; }
+    .project-card.dark .project-techs span { background:rgba(255,255,255,0.08); color:rgba(255,255,255,0.6); border-color:transparent; }
+    .project-card.dark .project-link { color:#A8C4FF; font-weight:700; }
+    .project-card.dark:hover { border-color:var(--rose); }
+    .project-tag { display:inline-block; font-size:10px; font-weight:700; letter-spacing:0.12em; text-transform:uppercase; padding:5px 12px; border-radius:100px; background:var(--rose-pale); color:var(--rose); border:1px solid rgba(196,112,90,0.2); width:fit-content; }
+    .project-tag.react { background:rgba(97,218,251,0.1); color:#0891b2; border-color:rgba(97,218,251,0.2); }
+    .project-tag.js { background:rgba(234,179,8,0.1); color:#854d0e; border-color:rgba(234,179,8,0.2); }
+    .project-tag.seo { background:var(--sage-pale); color:var(--sage); border-color:rgba(90,122,101,0.2); }
+    .project-tag.travel { background:rgba(168,85,247,0.08); color:#6b21a8; border-color:rgba(168,85,247,0.15); }
+    .project-tag.ai { background:rgba(245,69,45,0.08); color:#c0392b; border-color:rgba(245,69,45,0.15); }
+    .project-card h3 { font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:600; line-height:1.2; color:var(--ink); }
+    .project-card p { font-size:13px; line-height:1.7; color:var(--ink-mid); font-weight:500; flex:1; }
+    .project-techs { display:flex; flex-wrap:wrap; gap:7px; }
+    .project-techs span { font-size:11px; font-weight:600; padding:4px 10px; border-radius:100px; background:var(--surface); color:var(--ink-mid); border:1px solid var(--border); }
+    .project-link { font-size:13px; font-weight:700; color:#1A3A7A; text-decoration:none; transition:letter-spacing 0.2s; margin-top:auto; }
+    .project-link:hover { letter-spacing:0.08em; }
+
+    .contact-section { text-align:center; padding:80px 48px; }
+    .contact-title { font-family:'Cormorant Garamond',serif; font-size:clamp(40px,6vw,80px); font-weight:300; line-height:1.1; color:var(--ink); margin-bottom:8px; }
+    .contact-title em { font-style:italic; color:var(--sage); }
+    .contact-sub { font-size:16px; color:var(--ink-mid); font-weight:400; margin-bottom:32px; }
+    .contact-links { display:flex; justify-content:center; gap:16px; flex-wrap:wrap; }
+
+    .footer { background:#6B7FA3; padding:28px 48px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
+    .footer-name { font-family:'Cormorant Garamond',serif; font-size:18px; font-weight:400; color:#fff; }
+    .footer-links { display:flex; gap:24px; }
+    .footer-links a { font-size:12px; color:rgba(255,255,255,0.7); text-decoration:none; font-weight:500; transition:color 0.2s; }
+    .footer-links a:hover { color:#fff; }
+    .footer-copy { font-size:11px; color:rgba(255,255,255,0.6); }
+
+    @keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:none} }
+
+    @media(max-width:768px) {
+      .hero{grid-template-columns:1fr} .hero-right{display:none} .hero-left{border-right:none; padding:60px 24px;}
+      .about-grid{grid-template-columns:1fr;gap:40px} .about-left{position:static}
+      .projects-grid{grid-template-columns:1fr}
+      .nav{padding:18px 24px} .skills-strip{padding:16px 24px}
+      .container{padding:0 24px} .footer{flex-direction:column;text-align:center;padding:24px;}
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="nav">
+    <a href="#" class="nav-logo">Mia Chou</a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact" class="nav-cta">Get in Touch</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">✦ Available for Remote Opportunities</p>
+      <h1 class="hero-title">Mia <span class="hero-title-italic">Chou.</span></h1>
+      <p class="hero-role">Frontend Developer & UX Coder</p>
+      <p class="hero-desc">Frontend developer based in Leeds, with a background in marketing and banking. Trained with SheCodes, certified by Google and Lloyds Banking Group, with hands-on experience at HSBC.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-primary">View My Work</a>
+        <a href="https://github.com/mia-chou" target="_blank" class="btn-ghost">GitHub ↗</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="hero-stat-card"><div class="stat-num">6</div><div class="stat-label">Projects Built</div></div>
+      <div class="hero-stat-card"><div class="stat-num">4+</div><div class="stat-label">Years Coding</div></div>
+      <div class="hero-stat-card"><div class="stat-num">2</div><div class="stat-label">Masters Degrees</div></div>
+    </div>
+  </section>
+
+  <div class="skills-strip">
+    <div class="skill-pill">HTML & CSS</div><div class="skill-pill">Responsive Design</div>
+    <div class="skill-pill">JavaScript</div><div class="skill-pill">UX Design</div>
+    <div class="skill-pill">Bootstrap</div><div class="skill-pill">SEO</div>
+    <div class="skill-pill">AI Integration</div><div class="skill-pill">React</div>
+    <div class="skill-pill">Web Hosting</div>
+  </div>
+
+  <section class="section" id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-left">
+          <span class="about-tag">About Me</span>
+          <h2 class="about-big">Marketing<br>brain.<br><em>Developer</em><br>hands.</h2>
+        </div>
+        <div class="about-right">
+          <p>I started learning to code in December 2021 through SheCodes and have continued building frontend and UX-focused projects ever since.</p>
+          <p>My background combines customer-facing experience with digital problem-solving. From supporting customers at HSBC to helping international students at the University of Leeds, I developed a strong understanding of communication, onboarding, and user needs. That experience continues to shape how I think about the people who will actually use the products I build.</p>
+          <div class="about-creds">
+            <div class="cred-row"><span class="cred-emoji">🎓</span><div><div class="cred-text">MA Communication & Media</div><div class="cred-sub">University of Leeds</div></div></div>
+            <div class="cred-row"><span class="cred-emoji">🎓</span><div><div class="cred-text">MSc Marketing (In Progress)</div><div class="cred-sub">Leeds Beckett University</div></div></div>
+            <div class="cred-row"><span class="cred-emoji">🏦</span><div><div class="cred-text">UX Design Job Simulation</div><div class="cred-sub">Lloyds Banking Group · Forage 2026</div></div></div>
+            <div class="cred-row"><span class="cred-emoji">💻</span><div><div class="cred-text">Certified Developer</div><div class="cred-sub">SheCodes</div></div></div>
+            <div class="cred-row"><span class="cred-emoji">🔍</span><div><div class="cred-text">Fundamentals of Digital Marketing</div><div class="cred-sub">Google Digital Garage</div></div></div>
+            <div class="cred-row"><span class="cred-emoji">🏦</span><div><div class="cred-text">Work Experience</div><div class="cred-sub">HSBC</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section projects-section" id="projects">
+    <div class="container">
+      <p class="section-eyebrow">✦ My Work</p>
+      <h2 class="section-title">Selected Projects</h2>
+      <div class="projects-grid">
+        <div class="project-card dark"><div class="project-tag">UX Case Study</div><h3>Banking Onboarding Trust System</h3><p>A UX case study looking at how the UK bank account opening process could be clearer and less stressful for new customers. Includes a working progress tracker, document checklist and status timeline.</p><div class="project-techs"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>UX Research</span></div><a href="banking.html" class="project-link">View Project →</a></div>
+        <div class="project-card dark"><div class="project-tag">UX Case Study</div><h3>Student Accommodation Transparency</h3><p>A project addressing the lack of transparency in UK student housing contracts. Built a contract clarity tool, pain points chart and refund tracker aimed at international students.</p><div class="project-techs"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>UX Research</span></div><a href="project-a.html" class="project-link">View Project →</a></div>
+        <div class="project-card"><div class="project-tag ai">AI Project</div><h3>AI Cocktail Generator</h3><p>Type in what you've got and get a cocktail suggestion back. Built with JavaScript and Axios, connected to an AI API.</p><div class="project-techs"><span>JavaScript</span><span>Axios</span><span>AI API</span></div><a href="https://cocktail-generator-project.netlify.app/" target="_blank" class="project-link">Live Site →</a></div>
+        <div class="project-card"><div class="project-tag react">React</div><h3>React Weather App</h3><p>A weather app that pulls live data for any city. Built with React and a weather API.</p><div class="project-techs"><span>React</span><span>Weather API</span></div><a href="https://react-weather-clima-app.netlify.app/" target="_blank" class="project-link">Live Site →</a></div>
+
+        <div class="project-card"><div class="project-tag seo">SEO</div><h3>SEO Multi-Page Website</h3><p>A multi-page site built with SEO in mind, covering meta tags, structured content and page organisation.</p><div class="project-techs"><span>HTML</span><span>SEO</span></div><a href="https://seo-multiple-page-project.netlify.app/" target="_blank" class="project-link">Live Site →</a></div>
+        <div class="project-card"><div class="project-tag travel">Travel Experience Platform</div><h3>Explore Leeds</h3><p>A fully responsive travel guide to Leeds built with CSS Grid, custom column layouts, media queries and adaptive aspect ratios. Layout collapses cleanly across all screen sizes.</p><div class="project-techs"><span>HTML</span><span>CSS</span><span>CSS Grid</span><span>Responsive Design</span></div><a href="https://leeds-travel-project.netlify.app/" target="_blank" class="project-link">Live Site →</a></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact-section" id="contact">
+    <p class="section-eyebrow" style="margin-bottom:16px;">✦ Get In Touch</p>
+    <h2 class="contact-title">Let's work<br><em>together.</em></h2>
+    <p class="contact-sub">Open to remote roles in the UK and EU.</p>
+    <div class="contact-links">
+      <a href="mailto:mia.chou.dev@gmail.com" class="btn-primary">mia.chou.dev@gmail.com</a>
+      <a href="https://github.com/mia-chou" target="_blank" class="btn-ghost">GitHub ↗</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span class="footer-name">Mia Chou</span>
+    <div class="footer-links">
+      <a href="https://github.com/mia-chou" target="_blank">GitHub</a>
+      <a href="mailto:mia.chou.dev@gmail.com">Email</a>
+    </div>
+    <span class="footer-copy">2026</span>
+  </footer>
+
+  <script>
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.project-card').forEach((card, i) => {
+      card.style.transitionDelay = `${i * 0.06}s`;
+      obs.observe(card);
+    });
+  </script>
+</body>
+</html>

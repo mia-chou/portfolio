@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banking Onboarding Trust System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style-banking.css">
+</head>
+<body>
+
+  <nav class="nav">
+    <span class="nav-label">UX Case Study</span>
+    <div class="nav-tags">
+      <span class="tag">Banking</span>
+      <span class="tag">Trust</span>
+      <span class="tag">Onboarding</span>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-eyebrow">Project B — Financial Services</p>
+      <h1 class="hero-title">Banking<br>Onboarding<br>Trust System</h1>
+      <p class="hero-desc">Redesigning the account opening experience to reduce anxiety, build confidence, and make banking feel accessible for every new customer.</p>
+      <div class="hero-stats">
+        <div><div class="stat-label">Focus Area</div><div class="stat-value">Trust & Access</div></div>
+        <div><div class="stat-label">Audience</div><div class="stat-value">New Customers</div></div>
+        <div><div class="stat-label">Market</div><div class="stat-value">UK 2026</div></div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="card-chip"></div>
+        <div class="card-lines">
+          <div class="card-line long"></div>
+          <div class="card-line short"></div>
+        </div>
+        <div class="card-badge">✓ Verified</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+
+    <!-- 01 OVERVIEW -->
+    <section class="section" id="s1">
+      <div class="section-header">
+        <div class="section-number">01</div>
+        <div>
+          <h2 class="section-title">Project Overview</h2>
+          <p class="section-sub">The problem space</p>
+        </div>
+      </div>
+      <div class="overview-card">
+        <p>Opening a bank account should feel empowering — but for many new customers, it's overwhelming. This project redesigns the <strong>onboarding journey</strong> to be transparent, guided, and reassuring, reducing drop-offs and building long-term trust from the very first interaction.</p>
+        <div class="proto-label">⚡ Interactive Prototype — Onboarding Progress Tracker</div>
+        <div class="progress-tracker">
+          <div class="tracker-steps">
+            <div class="tracker-step completed" data-step="1">
+              <div class="step-circle">✓</div>
+              <div class="step-info"><div class="step-name">Eligibility Check</div><div class="step-time">~2 min</div></div>
+            </div>
+            <div class="tracker-line completed"></div>
+            <div class="tracker-step completed" data-step="2">
+              <div class="step-circle">✓</div>
+              <div class="step-info"><div class="step-name">Personal Details</div><div class="step-time">~3 min</div></div>
+            </div>
+            <div class="tracker-line active"></div>
+            <div class="tracker-step active" data-step="3">
+              <div class="step-circle">3</div>
+              <div class="step-info"><div class="step-name">Upload Documents</div><div class="step-time">~5 min</div></div>
+            </div>
+            <div class="tracker-line"></div>
+            <div class="tracker-step" data-step="4">
+              <div class="step-circle">4</div>
+              <div class="step-info"><div class="step-name">Review & Submit</div><div class="step-time">~2 min</div></div>
+            </div>
+            <div class="tracker-line"></div>
+            <div class="tracker-step" data-step="5">
+              <div class="step-circle">5</div>
+              <div class="step-info"><div class="step-name">Account Activated</div><div class="step-time">Instant</div></div>
+            </div>
+          </div>
+          <div class="tracker-footer">
+            <span class="tracker-status">Step 3 of 5 — You're more than halfway there!</span>
+            <button class="tracker-btn" onclick="advanceStep()">Next Step →</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 02 RESEARCH -->
+    <section class="section" id="s2">
+      <div class="section-header">
+        <div class="section-number">02</div>
+        <div>
+          <h2 class="section-title">Research Insights</h2>
+          <p class="section-sub">What we discovered</p>
+        </div>
+      </div>
+      <div class="insight-grid">
+        <div class="insight-card">
+          <div class="insight-icon">📋</div>
+          <h3>Unclear Document Requirements</h3>
+          <p>Customers don't know what documents they need upfront, causing frustration and mid-flow drop-offs.</p>
+        </div>
+        <div class="insight-card">
+          <div class="insight-icon">🕐</div>
+          <h3>Invisible Application Status</h3>
+          <p>Once submitted, applicants have no visibility into where their application stands or how long it will take.</p>
+        </div>
+        <div class="insight-card">
+          <div class="insight-icon">😰</div>
+          <h3>Fear of Rejection</h3>
+          <p>Uncertainty around eligibility deters vulnerable and first-time customers from even starting the process.</p>
+        </div>
+        <div class="insight-card">
+          <div class="insight-icon">🗣️</div>
+          <h3>Jargon-Heavy Language</h3>
+          <p>Legal and financial terminology alienates new customers, especially those unfamiliar with UK banking.</p>
+        </div>
+      </div>
+      <div class="proto-label">⚡ Interactive Prototype — Document Requirement Checklist</div>
+      <div class="checklist-widget">
+        <div class="checklist-header">
+          <span class="checklist-title">Before you start — gather these documents</span>
+          <span class="checklist-progress" id="checkProgress">0 of 4 ready</span>
+        </div>
+        <div class="checklist-items">
+          <label class="check-item"><input type="checkbox" onchange="updateProgress()"><div class="check-box"></div><div class="check-content"><div class="check-name">Valid Photo ID</div><div class="check-desc">Passport, driving licence, or national ID card</div></div><span class="check-badge">Required</span></label>
+          <label class="check-item"><input type="checkbox" onchange="updateProgress()"><div class="check-box"></div><div class="check-content"><div class="check-name">Proof of Address</div><div class="check-desc">Utility bill or bank statement from the last 3 months</div></div><span class="check-badge">Required</span></label>
+          <label class="check-item"><input type="checkbox" onchange="updateProgress()"><div class="check-box"></div><div class="check-content"><div class="check-name">National Insurance Number</div><div class="check-desc">Found on your payslip or HMRC letters</div></div><span class="check-badge">Required</span></label>
+          <label class="check-item"><input type="checkbox" onchange="updateProgress()"><div class="check-box"></div><div class="check-content"><div class="check-name">Mobile Number</div><div class="check-desc">For identity verification and account alerts</div></div><span class="check-badge optional-badge">Optional</span></label>
+        </div>
+        <div class="checklist-bar"><div class="checklist-fill" id="checkFill"></div></div>
+      </div>
+    </section>
+
+    <!-- 03 OPPORTUNITIES -->
+    <section class="section" id="s3">
+      <div class="section-header">
+        <div class="section-number">03</div>
+        <div>
+          <h2 class="section-title">Opportunities</h2>
+          <p class="section-sub">Where we can intervene</p>
+        </div>
+      </div>
+      <div class="opp-list">
+        <div class="opp-item">
+          <div class="opp-num">1</div>
+          <div>
+            <div class="opp-text">Set clear expectations before the process begins</div>
+            <div class="opp-sub">Show time estimates, required documents, and eligibility criteria upfront</div>
+          </div>
+        </div>
+        <div class="opp-item">
+          <div class="opp-num">2</div>
+          <div>
+            <div class="opp-text">Make the application journey visible at every step</div>
+            <div class="opp-sub">Progress indicators and real-time status updates reduce anxiety significantly</div>
+          </div>
+        </div>
+        <div class="opp-item">
+          <div class="opp-num">3</div>
+          <div>
+            <div class="opp-text">Communicate decisions with clarity and empathy</div>
+            <div class="opp-sub">Explain outcomes in plain language, with next steps always provided</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 SOLUTIONS -->
+    <section class="section" id="s4">
+      <div class="section-header">
+        <div class="section-number">04</div>
+        <div>
+          <h2 class="section-title">Proposed Solutions</h2>
+          <p class="section-sub">Design interventions</p>
+        </div>
+      </div>
+      <div class="solution-grid">
+        <div class="solution-card"><div class="sol-icon">🗺️</div><h3>Onboarding Progress Tracker</h3></div>
+        <div class="solution-card"><div class="sol-icon">📎</div><h3>Document Requirement Checklist</h3></div>
+        <div class="solution-card"><div class="sol-icon">✅</div><h3>Plain-Language Eligibility Guide</h3></div>
+        <div class="solution-card"><div class="sol-icon">🔔</div><h3>Real-Time Status Notifications</h3></div>
+        <div class="solution-card"><div class="sol-icon">💬</div><h3>Transparent Decision Explanations</h3></div>
+      </div>
+      <div class="proto-label">⚡ Interactive Prototype — Application Status Tracker</div>
+      <div class="status-timeline">
+        <div class="timeline-item done">
+          <div class="timeline-dot">✓</div>
+          <div class="timeline-content">
+            <div class="timeline-title">Application Received</div>
+            <div class="timeline-desc">We have received your application and documents.</div>
+            <div class="timeline-time">Today, 10:32am</div>
+          </div>
+        </div>
+        <div class="timeline-item done">
+          <div class="timeline-dot">✓</div>
+          <div class="timeline-content">
+            <div class="timeline-title">Identity Verified</div>
+            <div class="timeline-desc">Your photo ID and address have been confirmed.</div>
+            <div class="timeline-time">Today, 10:45am</div>
+          </div>
+        </div>
+        <div class="timeline-item current">
+          <div class="timeline-dot pulse">⋯</div>
+          <div class="timeline-content">
+            <div class="timeline-title">Credit Check in Progress</div>
+            <div class="timeline-desc">This usually takes less than 2 minutes. No action needed from you.</div>
+            <div class="timeline-time">In progress...</div>
+          </div>
+        </div>
+        <div class="timeline-item pending">
+          <div class="timeline-dot">4</div>
+          <div class="timeline-content">
+            <div class="timeline-title">Decision Made</div>
+            <div class="timeline-desc">You will be notified by email and SMS.</div>
+            <div class="timeline-time">Est. 5 min</div>
+          </div>
+        </div>
+        <div class="timeline-item pending">
+          <div class="timeline-dot">5</div>
+          <div class="timeline-content">
+            <div class="timeline-title">Account Activated</div>
+            <div class="timeline-desc">Your account is ready to use immediately.</div>
+            <div class="timeline-time">Est. 10 min</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 IMPACT -->
+    <section class="section" id="s5">
+      <div class="section-header">
+        <div class="section-number">05</div>
+        <div>
+          <h2 class="section-title">Expected Impact</h2>
+          <p class="section-sub">Measurable outcomes</p>
+        </div>
+      </div>
+      <div class="impact-row">
+        <div class="impact-card"><div class="impact-icon">📈</div><div class="impact-value">↑</div><div class="impact-label">Completion Rates</div></div>
+        <div class="impact-card"><div class="impact-icon">🤝</div><div class="impact-value">↑</div><div class="impact-label">Customer Trust</div></div>
+        <div class="impact-card"><div class="impact-icon">🎧</div><div class="impact-value">↓</div><div class="impact-label">Support Calls</div></div>
+        <div class="impact-card"><div class="impact-icon">🌍</div><div class="impact-value">↑</div><div class="impact-label">Financial Inclusion</div></div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer class="footer">
+    <span>Banking Onboarding Trust System</span>
+    <span>2026</span>
+  </footer>
+
+  <script>
+    const obs = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.section').forEach(s => obs.observe(s));
+
+    // Progress tracker
+    let currentStep = 3;
+    const stepMessages = ['', 'Just getting started!', 'Great progress!', 'You are more than halfway there!', 'Almost done!', 'All done — welcome aboard! 🎉'];
+    function advanceStep() {
+      if (currentStep >= 5) return;
+      const steps = document.querySelectorAll('.tracker-step');
+      const lines = document.querySelectorAll('.tracker-line');
+      steps[currentStep - 1].classList.remove('active');
+      steps[currentStep - 1].classList.add('completed');
+      steps[currentStep - 1].querySelector('.step-circle').textContent = '✓';
+      if (lines[currentStep - 1]) { lines[currentStep - 1].classList.remove('active'); lines[currentStep - 1].classList.add('completed'); }
+      currentStep++;
+      if (currentStep <= 5) {
+        steps[currentStep - 1].classList.add('active');
+        if (lines[currentStep - 1]) lines[currentStep - 1].classList.add('active');
+      }
+      document.querySelector('.tracker-status').textContent = currentStep <= 5 ? 'Step ' + currentStep + ' of 5 — ' + stepMessages[currentStep] : stepMessages[5];
+      if (currentStep > 5) document.querySelector('.tracker-btn').style.display = 'none';
+    }
+
+    // Checklist
+    function updateProgress() {
+      const boxes = document.querySelectorAll('.check-item input');
+      const checked = [...boxes].filter(b => b.checked).length;
+      document.getElementById('checkProgress').textContent = checked + ' of 4 ready';
+      document.getElementById('checkFill').style.width = (checked / 4 * 100) + '%';
+      boxes.forEach((b, i) => {
+        b.closest('.check-item').classList.toggle('checked', b.checked);
+      });
+    }
+  </script>
+
+</body>
+</html>
